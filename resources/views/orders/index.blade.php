@@ -6,14 +6,44 @@
         </div>
     </x-slot>
 
+    @if(session('success'))
+    <div id="successModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-40 transition-opacity duration-300">
+        <div class="bg-white rounded-lg shadow-xl max-w-sm w-full p-6 text-center transform transition-all duration-300 scale-100 border-t-4 border-green-500">
+            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100 mb-4">
+                <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+            </div>
+            
+            <h3 class="text-lg font-semibold text-gray-900 mb-1">Berhasil!</h3>
+            <p class="text-sm text-gray-500 mb-6">{{ session('success') }}</p>
+            
+            <button onclick="closeModal()" class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-4 rounded-md text-sm shadow-sm transition-colors duration-200">
+                Oke, Mengerti
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function closeModal() {
+            const modal = document.getElementById('successModal');
+            if (modal) {
+                modal.style.opacity = '0';
+                setTimeout(() => {
+                    modal.remove();
+                }, 300); // Menghapus elemen setelah animasi transisi memudar selesai
+            }
+        }
+
+        // Otomatis menutup dalam 4 detik jika tidak diklik
+        setTimeout(() => {
+            closeModal();
+        }, 4000);
+    </script>
+    @endif
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            @if(session('success'))
-                <div class="mb-4 bg-green-50 text-green-700 p-3 rounded-md text-sm">
-                    {{ session('success') }}
-                </div>
-            @endif
-
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
