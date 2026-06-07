@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\HomeController;
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
@@ -38,3 +39,6 @@ Route::middleware('auth')->group(function () {
 
 // Mengatur Autentikasi Bawaan Breeze (Login, Register, Logout)
 require __DIR__.'/auth.php';
+
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
